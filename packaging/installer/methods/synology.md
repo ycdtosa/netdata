@@ -14,8 +14,12 @@ On current Synology systems (DSM 7.2.2+), the kickstart script automates the ent
 
 By default, Netdata runs as `root`. To run it as the `netdata` user instead:
 
-1. Create a `netdata` group through the Synology control panel (no special access needed)
-2. Create a `netdata` user through the Synology control panel:
+1. Stop Netdata
+    ```sh
+    sudo systemctl stop netdata
+    ```
+2. Create a `netdata` group through the Synology control panel (no special access needed)
+3. Create a `netdata` user through the Synology control panel:
     - Assign it to the netdata group
     - Set a random password
     - Grant no access permission
@@ -25,17 +29,17 @@ By default, Netdata runs as `root`. To run it as the `netdata` user instead:
     sudo synouser --add netdata <SomeGoodPassword> "netdata agent" 0 "" 0
     sudo synogroup --add netdata netdata
     ```
-3. Set correct ownership permissions:
+4. Set correct ownership permissions:
     ```bash
     chown -R root:netdata /opt/netdata/usr/share/netdata
     chown -R netdata:netdata /opt/netdata/var/lib/netdata /opt/netdata/var/cache/netdata
     chown -R netdata:root /opt/netdata/var/log/netdata
     ````
-4. Restart Netdata
+5. Start netdata again:
     ```sh
-    /etc/rc.netdata restart
+    sudo systemctl start netdata
     ```
-
+   
 ## Older systems
 
 <details>

@@ -10,6 +10,9 @@ The [one-line installation script](/packaging/installer/methods/kickstart.md) wo
 
 On current Synology systems (DSM 7.2.2+), the kickstart script automates the entire installation process but doesn't create the necessary `netdata` user and group. As a result, Netdata operates with root privileges instead. Once installed, it can be controlled using standard systemd commands.
 
+Netdata default instalation on `/opt/netdata` will install it on `/dev/md0` which is usually a small device and will run out of space soon.
+It is recomented to change the configuration so `cache` and `logs` go to a bigger storage or a different machine.
+
 ### Run as netdata user
 
 By default, Netdata runs as `root`. To run it as the `netdata` user instead:
